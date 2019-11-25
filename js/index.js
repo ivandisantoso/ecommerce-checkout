@@ -13,6 +13,7 @@ let sPlus = document.getElementById("sPlusBtn");
 const sUnitPrice = document.getElementById ("sUnitPriceLbl");
 let sExtPrice = document.getElementById ("sExtPriceLbl");
 
+let subTotal = document.getElementById(`subTotalLbl`);
 let calc = document.getElementById("calcBtn");
 var plusBtn$;
 pItem.innerHTML = `Pants`;
@@ -21,6 +22,9 @@ pExtPrice.innerHTML = 0.00;
 sItem.innerHTML = `Shirt`;
 sUnitPrice.innerHTML = 10.99;
 sExtPrice.innerHTML = 0.00;
+
+let pExt1 = parseInt(pIncreaseValue());
+let sExt1 = parseInt(sIncreaseValue());
 
 
 
@@ -85,19 +89,6 @@ sExtPrice.innerHTML = 0.00;
 
 // }
 
-
-function pIncreaseValue(){
-    // item.qty++;
-    // document.getElementById(`qtyLbl`).innerHTML=item.qty;
-    let pIncrQty = parseInt(pQty.innerHTML)+1;
-    pQty.innerHTML = pIncrQty;
-   
-    let pExt = (pIncrQty * pUnitPrice.innerHTML).toFixed(2);
-    pExtPrice.innerHTML = pExt;
-    
-  
-}
-
 function pDecreaseValue(){
     let pDecrQty = parseInt(pQty.innerHTML)-1;
     pQty.innerHTML = pDecrQty;
@@ -105,30 +96,45 @@ function pDecreaseValue(){
         let pExt = (pDecrQty * pUnitPrice.innerHTML).toFixed(2);
         pExtPrice.innerHTML = pExt;  
         console.log(pExt);
+        return pExt;
+        
     } else {
-        pExtPrice.innerHTML = 0;
-        pQty.innerHTML = 0;
+        let pExt = pExtPrice.innerHTML * 0;
+        pQty.innerHTML = pExt;
+        pExtPrice.innerHTML = pExt;
+        console.log(pExt);
+        return pExt;
     }
-    
+}
 
-    
-    
-
+function pIncreaseValue(){
+ 
+    let pIncrQty = parseInt(pQty.innerHTML)+1;
+    pQty.innerHTML = pIncrQty;
+   
+    let pExt = (pIncrQty * pUnitPrice.innerHTML).toFixed(2);
+    pExtPrice.innerHTML = pExt;
+    console.log(pExt);
+    return pExt;
+  
 }
 
 function sDecreaseValue(){
     let sDecrQty = parseInt(sQty.innerHTML)-1;
     sQty.innerHTML = sDecrQty;
-    let sExt = (sDecrQty * sUnitPrice.innerHTML).toFixed(2);
-    sExtPrice.innerHTML = sExt;
     if (sDecrQty>0){
         let sExt = (sDecrQty * sUnitPrice.innerHTML).toFixed(2);
         sExtPrice.innerHTML = sExt;  
+        console.log(sExt);
+        return sExt;
+        
     } else {
-        sExtPrice.innerHTML = 0;
-        sQty.innerHTML = 0;
+        let sExt = sExtPrice.innerHTML * 0;
+        sQty.innerHTML = sExt;
+        sExtPrice.innerHTML = sExt;
+        console.log(sExt);
+        return sExt;
     }
-
 }
 
 function sIncreaseValue(){
@@ -136,14 +142,17 @@ function sIncreaseValue(){
     sQty.innerHTML = sIncrQty;
     let sExt = (sIncrQty * sUnitPrice.innerHTML).toFixed(2);
     sExtPrice.innerHTML = sExt;
+    console.log(sExt);
+    return sExt;
+}
+
+function calcSubtotal(pExt1, sExt1){
+    let subTot = sExt1+pExt1;
+    subTotal.innerHTML = subTot;
+    console.log(subTotal);
 }
 
 
-
-function calculation(){
-    let subTotal = pExtPrice+sExtPrice;
-    console.log(pExtPrice);
-}
 
 
 
@@ -154,7 +163,7 @@ sMinus.addEventListener("click",sDecreaseValue);
 sPlus.addEventListener("click",sIncreaseValue);
 // const arrItemsHtml = allItems.map(getItemAsHtml);
 // document.getElementById(`pItemLbl`).innerHTML=arrItemsHtml;
-calc.addEventListener("click",calculation);
+calc.addEventListener("click",calcSubtotal(sExt1, pExt1));
 
 // const arrItemsHtml = allItems.map(getAllItemsAsHtmlString);
 // const strItemsHtml = arrItemsHtml.join(`\n`);
