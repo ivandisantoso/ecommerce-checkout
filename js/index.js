@@ -14,6 +14,8 @@ const sUnitPrice = document.getElementById ("sUnitPriceLbl");
 let sExtPrice = document.getElementById ("sExtPriceLbl");
 
 let subTotal = document.getElementById(`subTotalLbl`);
+let tax = document.getElementById(`taxLbl`);
+let total = document.getElementById(`totalLbl`);
 let calc = document.getElementById("calcBtn");
 var plusBtn$;
 pItem.innerHTML = `Pants`;
@@ -22,9 +24,6 @@ pExtPrice.innerHTML = 0.00;
 sItem.innerHTML = `Shirt`;
 sUnitPrice.innerHTML = 10.99;
 sExtPrice.innerHTML = 0.00;
-
-let pExt1 = parseInt(pIncreaseValue());
-let sExt1 = parseInt(sIncreaseValue());
 
 
 
@@ -96,14 +95,14 @@ function pDecreaseValue(){
         let pExt = (pDecrQty * pUnitPrice.innerHTML).toFixed(2);
         pExtPrice.innerHTML = pExt;  
         console.log(pExt);
-        return pExt;
+        // return pExt;
         
     } else {
         let pExt = pExtPrice.innerHTML * 0;
         pQty.innerHTML = pExt;
         pExtPrice.innerHTML = pExt;
         console.log(pExt);
-        return pExt;
+        // return pExt;
     }
 }
 
@@ -115,7 +114,7 @@ function pIncreaseValue(){
     let pExt = (pIncrQty * pUnitPrice.innerHTML).toFixed(2);
     pExtPrice.innerHTML = pExt;
     console.log(pExt);
-    return pExt;
+    // return pExt;
   
 }
 
@@ -126,14 +125,14 @@ function sDecreaseValue(){
         let sExt = (sDecrQty * sUnitPrice.innerHTML).toFixed(2);
         sExtPrice.innerHTML = sExt;  
         console.log(sExt);
-        return sExt;
+        // return sExt;
         
     } else {
         let sExt = sExtPrice.innerHTML * 0;
         sQty.innerHTML = sExt;
         sExtPrice.innerHTML = sExt;
         console.log(sExt);
-        return sExt;
+        // return sExt;
     }
 }
 
@@ -143,13 +142,30 @@ function sIncreaseValue(){
     let sExt = (sIncrQty * sUnitPrice.innerHTML).toFixed(2);
     sExtPrice.innerHTML = sExt;
     console.log(sExt);
-    return sExt;
+    // return sExt;
 }
 
-function calcSubtotal(pExt1, sExt1){
-    let subTot = sExt1+pExt1;
-    subTotal.innerHTML = subTot;
+function calcSubtotal(){
+    let sExtToInt = parseFloat(sExtPrice.innerHTML);
+    let pExtToInt = parseFloat(pExtPrice.innerHTML);
+    let subTot = sExtToInt+pExtToInt;
+    subTotal.innerHTML = subTot.toFixed(2);
     console.log(subTotal);
+}
+
+function calcTax(){
+    let subTot = parseFloat(subTotal.innerHTML).toFixed(2);
+    let taxSubTot = subTot * 0.13;
+    tax.innerHTML = taxSubTot.toFixed(2);
+    console.log(tax);
+}
+
+function calcTotal(){
+    let taxToFloat = parseFloat(tax.innerHTML);
+    let subTotToFloat = parseFloat(subTotal.innerHTML);
+    let tot = taxToFloat+subTotToFloat;
+    total.innerHTML = tot.toFixed(2);
+    console.log(total);
 }
 
 
@@ -163,7 +179,11 @@ sMinus.addEventListener("click",sDecreaseValue);
 sPlus.addEventListener("click",sIncreaseValue);
 // const arrItemsHtml = allItems.map(getItemAsHtml);
 // document.getElementById(`pItemLbl`).innerHTML=arrItemsHtml;
-calc.addEventListener("click",calcSubtotal(sExt1, pExt1));
+calc.addEventListener("click",calcSubtotal);
+calc.addEventListener("click",calcTax);
+calc.addEventListener("click",calcTotal);
+
+
 
 // const arrItemsHtml = allItems.map(getAllItemsAsHtmlString);
 // const strItemsHtml = arrItemsHtml.join(`\n`);
