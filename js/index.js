@@ -17,7 +17,8 @@ let subTotal = document.getElementById(`subTotalLbl`);
 let tax = document.getElementById(`taxLbl`);
 let total = document.getElementById(`totalLbl`);
 let calc = document.getElementById("calcBtn");
-var plusBtn$;
+let promo = document.getElementById(`promoBtn`);
+let code = document.getElementById(`codeLbl`);
 pItem.innerHTML = `Pants`;
 pUnitPrice.innerHTML = 40.99;
 pExtPrice.innerHTML = 0.00;
@@ -168,6 +169,25 @@ function calcTotal(){
     console.log(total);
 }
 
+function getPromo(){
+    let cNoTax = "NOTAX";
+    let cFifty = "FIFTYFIFTY";
+    let codeUp = prompt(`Enter a coupon code `).toUpperCase();
+    code.innerHTML = codeUp;
+    
+    // console.log(code);
+    if (codeUp == cNoTax){
+        alert(`accepted ${codeUp}`);
+
+    } else if(codeUp == cFifty){
+        alert(`acceptted ${codeUp}`);
+
+    } else{
+        alert(`not accepted`);
+    }
+}
+
+
 
 
 
@@ -182,6 +202,7 @@ sPlus.addEventListener("click",sIncreaseValue);
 calc.addEventListener("click",calcSubtotal);
 calc.addEventListener("click",calcTax);
 calc.addEventListener("click",calcTotal);
+promo.addEventListener(`click`,getPromo);
 
 
 
