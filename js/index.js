@@ -95,28 +95,22 @@ function pDecreaseValue(){
     if (pDecrQty>0){
         let pExt = (pDecrQty * pUnitPrice.innerHTML).toFixed(2);
         pExtPrice.innerHTML = pExt;  
-        console.log(pExt);
-        // return pExt;
-        
+        //console.log(pExt);      
     } else {
         let pExt = pExtPrice.innerHTML * 0;
         pQty.innerHTML = pExt;
         pExtPrice.innerHTML = pExt;
-        console.log(pExt);
-        // return pExt;
+        //console.log(pExt);
     }
 }
 
 function pIncreaseValue(){
- 
     let pIncrQty = parseInt(pQty.innerHTML)+1;
     pQty.innerHTML = pIncrQty;
    
     let pExt = (pIncrQty * pUnitPrice.innerHTML).toFixed(2);
     pExtPrice.innerHTML = pExt;
-    console.log(pExt);
-    // return pExt;
-  
+    //console.log(pExt); 
 }
 
 function sDecreaseValue(){
@@ -125,15 +119,13 @@ function sDecreaseValue(){
     if (sDecrQty>0){
         let sExt = (sDecrQty * sUnitPrice.innerHTML).toFixed(2);
         sExtPrice.innerHTML = sExt;  
-        console.log(sExt);
-        // return sExt;
+        //console.log(sExt);
         
     } else {
         let sExt = sExtPrice.innerHTML * 0;
         sQty.innerHTML = sExt;
         sExtPrice.innerHTML = sExt;
-        console.log(sExt);
-        // return sExt;
+        //console.log(sExt);
     }
 }
 
@@ -142,8 +134,7 @@ function sIncreaseValue(){
     sQty.innerHTML = sIncrQty;
     let sExt = (sIncrQty * sUnitPrice.innerHTML).toFixed(2);
     sExtPrice.innerHTML = sExt;
-    console.log(sExt);
-    // return sExt;
+    //console.log(sExt);
 }
 
 function calcSubtotal(){
@@ -151,14 +142,14 @@ function calcSubtotal(){
     let pExtToInt = parseFloat(pExtPrice.innerHTML);
     let subTot = sExtToInt+pExtToInt;
     subTotal.innerHTML = subTot.toFixed(2);
-    console.log(subTotal);
+    //console.log(subTotal);
 }
 
 function calcTax(){
     let subTot = parseFloat(subTotal.innerHTML).toFixed(2);
     let taxSubTot = subTot * 0.13;
     tax.innerHTML = taxSubTot.toFixed(2);
-    console.log(tax);
+    //console.log(tax);
 }
 
 function calcTotal(){
@@ -166,7 +157,7 @@ function calcTotal(){
     let subTotToFloat = parseFloat(subTotal.innerHTML);
     let tot = taxToFloat+subTotToFloat;
     total.innerHTML = tot.toFixed(2);
-    console.log(total);
+    //console.log(total);
 }
 
 function getPromo(){
@@ -175,15 +166,20 @@ function getPromo(){
     let codeUp = prompt(`Enter a coupon code `).toUpperCase();
     code.innerHTML = codeUp;
     
-    // console.log(code);
     if (codeUp == cNoTax){
-        alert(`accepted ${codeUp}`);
+        let tax0 = parseFloat(sExtPrice.innerHTML)*0;
+        tax.innerHTML=tax0;
+        let totalNoTax = parseFloat(subTotal.innerHTML).toFixed(2);
+        total.innerHTML = totalNoTax;
+        //console.log(tax0);
 
     } else if(codeUp == cFifty){
-        alert(`acceptted ${codeUp}`);
-
+        let subTot50 = parseFloat(subTotal.innerHTML)*0.5;
+        subTotal.innerHTML = subTot50;
+        calcTax();
+        calcTotal();
     } else{
-        alert(`not accepted`);
+        alert(`Promo code is invalid`);
     }
 }
 
